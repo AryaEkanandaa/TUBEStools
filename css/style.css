@@ -1,0 +1,16 @@
+.warna1{
+    background-color: aqua;
+}
+
+.warna2{
+    background-color: aquamarine;
+}
+
+.warna3{
+    background-color: azure;
+}
+
+.banner{
+    height: 80vh;
+    background: linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.4)),url('../images/banner.jpg');
+}
