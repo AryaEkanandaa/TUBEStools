@@ -90,8 +90,8 @@ $jumlahBuku = mysqli_num_rows($queryBuku);
                                 <td>Rp <?php echo number_format($data['harga'], 0, ',', '.'); ?></td>
                                 <td><?php echo $data['stok']; ?></td>
                                 <td>
-                                    <a href="buku-detail.php?idBuku=<?php echo $data['idBuku']; ?>" class="btn btn-info">
-                                        <i class="fas fa-search"></i>
+                                    <a href="buku-detail.php?idBuku=<?php echo $data['idBuku']; ?>" class="btn btn-secondary">
+                                        <i class="fas fa-search #ffffff"></i>
                                     </a>
                                 </td>
                             </tr>

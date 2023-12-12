@@ -1,8 +1,12 @@
 <?php
 require "../koneksi.php";
 
+$queryTransaksi = mysqli_query($con, "SELECT * FROM tbtransaksi");
 $queryPelanggan = mysqli_query($con, "SELECT * FROM tbpelanggan");
 $queryPegawai = mysqli_query($con, "SELECT * FROM tbpegawai");
+$queryBuku = mysqli_query($con, "SELECT * FROM buku");
+
+$jumlahTransaksi = mysqli_num_rows($queryTransaksi);
 
 function generateRandomString($length = 10)
 {
@@ -44,7 +48,7 @@ function generateRandomString($length = 10)
         display: flex;
         justify-content: center;
         align-items: center;
-        height: 130vh;
+        height: 135vh;
     }
 
     label {
@@ -103,6 +107,17 @@ function generateRandomString($length = 10)
                         </select>
                     </div>
                     <div class="mb-3">
+                        <label for="idBuku" class="form-label">Buku</label>
+                        <select name="idBuku" id="idBuku" class="form-select" required>
+                            <option value="">Pilih Buku</option>
+                            <?php
+                            while ($dataBuku = mysqli_fetch_array($queryBuku)) {
+                                echo "<option value='{$dataBuku['idBuku']}'>{$dataBuku['nama']}</option>";
+                            }
+                            ?>
+                        </select>
+                    </div>
+                    <div class="mb-3">
                         <label for="tanggalTransaksi" class="form-label">Tanggal Transaksi</label>
                         <input type="datetime-local" id="tanggalTransaksi" name="tanggalTransaksi" class="form-control" required>
                     </div>
@@ -150,6 +165,7 @@ function generateRandomString($length = 10)
                 if (isset($_POST['simpan'])) {
                     $idPelanggan = $_POST['idPelanggan'];
                     $idPegawai = $_POST['idPegawai'];
+                    $idBuku = $_POST['idBuku'];
                     $tanggalTransaksi = $_POST['tanggalTransaksi'];
                     $totalHarga = $_POST['totalHarga'];
                     $metodePembayaran = $_POST['metodePembayaran'];
@@ -158,7 +174,7 @@ function generateRandomString($length = 10)
                     $kodeReferensi = $_POST['kodeReferensi'];
                     $jenisTransaksi = $_POST['jenisTransaksi'];
 
-                    $queryTambah = mysqli_query($con, "INSERT INTO tbTransaksi (idPelanggan, idPegawai, tanggalTransaksi, totalHarga, metodePembayaran, statusPengiriman, alamatPengiriman, kodeReferensi, jenisTransaksi) VALUES ('$idPelanggan', '$idPegawai', '$tanggalTransaksi', '$totalHarga', '$metodePembayaran', '$statusPengiriman', '$alamatPengiriman', '$kodeReferensi', '$jenisTransaksi')");
+                    $queryTambah = mysqli_query($con, "INSERT INTO tbTransaksi (idPelanggan, idPegawai, idBuku, tanggalTransaksi, totalHarga, metodePembayaran, statusPengiriman, alamatPengiriman, kodeReferensi, jenisTransaksi) VALUES ('$idPelanggan', '$idPegawai', '$idBuku', '$tanggalTransaksi', '$totalHarga', '$metodePembayaran', '$statusPengiriman', '$alamatPengiriman', '$kodeReferensi', '$jenisTransaksi')");
 
                     if ($queryTambah) {
                         ?>

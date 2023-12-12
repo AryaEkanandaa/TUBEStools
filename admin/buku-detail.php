@@ -149,6 +149,7 @@ function generateRandomString($length = 10)
             </div>
             <div class="text-center">
                 <button type="submit" class="btn btn-success" name="simpan">Simpan</button>
+                <i class="fa-regular fa-pen-to-square"></i>
             </div>
         </form>
 

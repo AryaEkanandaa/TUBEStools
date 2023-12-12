@@ -103,6 +103,10 @@ $jumlahPelanggan = mysqli_num_rows($queryPelanggan);
                     <label for="tanggalLahir">Tanggal Lahir</label>
                     <input type="date" class="form-control" name="tanggalLahir" autocomplete="off" required>
                 </div>
+                <div>
+                    <label for="umur">Umur</label>
+                    <input type="umur" class="form-control" name="umur" autocomplete="off" required>
+                </div>  
                 <br>
                 <div>
                     <button type="submit" class="btn btn-success" name="simpanPelanggan">Simpan</button>
@@ -117,12 +121,12 @@ $jumlahPelanggan = mysqli_num_rows($queryPelanggan);
                 $alamat = mysqli_real_escape_string($con, $_POST['alamat']);
                 $email = mysqli_real_escape_string($con, $_POST['email']);
                 $tanggalLahir = mysqli_real_escape_string($con, $_POST['tanggalLahir']);
-
+                $umur = mysqli_real_escape_string($con, $_POST['umur']);
                 if (empty($namaPelanggan) || empty($noTelp) || empty($alamat) || empty($email) || empty($tanggalLahir)) {
                     echo '<div class="alert alert-danger mt-3" role="alert">Semua kolom harus diisi!</div>';
                 } else {
-                    $queryTambahPelanggan = mysqli_query($con, "INSERT INTO tbPelanggan(namaPelanggan, noTelp, alamat, email, tanggalLahir) 
-                                                        VALUES ('$namaPelanggan', '$noTelp', '$alamat', '$email', '$tanggalLahir')");
+                    $queryTambahPelanggan = mysqli_query($con, "INSERT INTO tbPelanggan(namaPelanggan, noTelp, alamat, email, tanggalLahir, umur) 
+                                                        VALUES ('$namaPelanggan', '$noTelp', '$alamat', '$email', '$tanggalLahir', '$umur')");
 
                     if ($queryTambahPelanggan) {
                         echo '<div class="alert alert-success mt-3" role="alert">Pelanggan berhasil ditambahkan</div>';

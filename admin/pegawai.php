@@ -41,7 +41,8 @@ $jumlahPegawai = mysqli_num_rows($queryPegawai);
         display: flex;
         justify-content: center;
         align-items: center;
-        height: 60vh; /* Set the height to 60% of the viewport height */
+        height: 60vh;
+        /* Set the height to 60% of the viewport height */
     }
 
     /* Custom styles for the form */
@@ -105,6 +106,14 @@ $jumlahPegawai = mysqli_num_rows($queryPegawai);
                     <label for="tanggalLahir">Tanggal Lahir</label>
                     <input type="date" class="form-control" name="tanggalLahir" autocomplete="off">
                 </div>
+                <div>
+                    <label for="statusPengiriman" class="form-label">Jabatan</label>
+                    <select name="statusPengiriman" id="statusPengiriman" class="form-select" required>
+                        <option value="Belum Diproses">Manajer</option>
+                        <option value="Dalam Pengiriman">Kasir</option>
+                        <option value="Terkirim">Pegawai</option>
+                    </select>
+                </div>
                 <br>
                 <div>
                     <button type="submit" class="btn btn-success" name="simpanPegawai">Simpan</button>
@@ -118,12 +127,13 @@ $jumlahPegawai = mysqli_num_rows($queryPegawai);
                 $alamat = mysqli_real_escape_string($con, $_POST['alamat']);
                 $email = mysqli_real_escape_string($con, $_POST['email']);
                 $tanggalLahir = mysqli_real_escape_string($con, $_POST['tanggalLahir']);
+                $jabatan = mysqli_real_escape_string($con, $_POST['jabatan']);
 
-                if (empty($namaPegawai) || empty($noTelp) || empty($alamat) || empty($email) || empty($tanggalLahir)) {
+                if (empty($namaPegawai) || empty($noTelp) || empty($alamat) || empty($email) || empty($tanggalLahir) || empty($jabatan)) {
                     echo '<div class="alert alert-danger mt-3" role="alert">Semua kolom harus diisi!</div>';
                 } else {
-                    $queryTambahPegawai = mysqli_query($con, "INSERT INTO tbpegawai (namaPegawai, noTelp, alamat, email, tanggalLahir) 
-                                                        VALUES ('$namaPegawai', '$noTelp', '$alamat', '$email', '$tanggalLahir')");
+                    $queryTambahPegawai = mysqli_query($con, "INSERT INTO tbpegawai (namaPegawai, noTelp, alamat, email, tanggalLahir, jabatan) 
+                                                        VALUES ('$namaPegawai', '$noTelp', '$alamat', '$email', '$tanggalLahir', '$jabatan')");
 
                     if ($queryTambahPegawai) {
                         echo '<div class="alert alert-success mt-3" role="alert">Pegawai berhasil ditambahkan</div>';
@@ -135,8 +145,8 @@ $jumlahPegawai = mysqli_num_rows($queryPegawai);
             }
             ?>
         </div>
-    <script src="../bootstrap-5.3.2-dist/js/bootstrap.bundle.min.js"></script>
-    <script src="../fontawesome-free-6.4.2-web/js/all.min.js"></script>
+        <script src="../bootstrap-5.3.2-dist/js/bootstrap.bundle.min.js"></script>
+        <script src="../fontawesome-free-6.4.2-web/js/all.min.js"></script>
 </body>
 
 </html>

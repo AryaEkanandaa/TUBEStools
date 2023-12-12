@@ -111,6 +111,14 @@ function generateRandomString($length = 10)
                         <input type="file" name="foto" id="foto" class="form-control" autocomplete="off" required>
                     </div>
                     <div class="mb-3">
+                        <label for="penulis" class="form-label">Penulis</label>
+                        <input type="text" name="penulis" id="penulis" class="form-control" autocomplete="off" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="penerbit" class="form-label">Penerbit</label>
+                        <input type="text" name="penerbit" id="penerbit" class="form-control" autocomplete="off" required>
+                    </div>
+                    <div class="mb-3">
                         <label for="deskripsi" class="form-label">Deskripsi</label>
                         <textarea name="deskripsi" id="deskripsi" cols="30" rows="5" class="form-control"
                             autocomplete="off" required></textarea>
@@ -133,6 +141,8 @@ function generateRandomString($length = 10)
                     $harga = htmlspecialchars($_POST['harga']);
                     $deskripsi = htmlspecialchars($_POST['deskripsi']);
                     $stok = htmlspecialchars($_POST['stok']);
+                    $penulis = htmlspecialchars($_POST['penulis']);
+                    $penerbit = htmlspecialchars($_POST['penerbit']);
 
                     $target_dir = "../images/";
                     $namaFile = basename($_FILES["foto"]["name"]);
@@ -175,7 +185,7 @@ function generateRandomString($length = 10)
                                 }
                             }
                         }
-                        $queryTambah = mysqli_query($con, "INSERT INTO buku(idKategori, nama, harga, foto, deskripsi, stok) VALUES ('$kategori','$nama','$harga','$newName','$deskripsi','$stok')");
+                        $queryTambah = mysqli_query($con, "INSERT INTO buku(idKategori, nama, harga, foto, deskripsi, stok, penulis, penerbit) VALUES ('$kategori','$nama','$harga','$newName','$deskripsi','$stok','$penulis','$penerbit')");
 
                         if ($queryTambah) {
                             ?>

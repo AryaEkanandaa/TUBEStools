@@ -50,8 +50,8 @@
                         Transaksi
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="transaksiDropdown">
-                        <li><a class="dropdown-item" href="list-pegawai.php">List Pegawai</a></li>
-                        <li><a class="dropdown-item" href="transaksi.php">Tambah Pegawai</a></li>
+                        <li><a class="dropdown-item" href="list-pegawai.php">List Transaksi</a></li>
+                        <li><a class="dropdown-item" href="transaksi.php">Tambah Transaksi</a></li>
                     </ul>
                 </li>
                 <li class="nav-item">
