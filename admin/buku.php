@@ -47,7 +47,7 @@ function generateRandomString($length = 10)
         display: flex;
         justify-content: center;
         align-items: center;
-        height: 100vh;
+        height: 130vh;
     }
 
     label {
@@ -143,6 +143,7 @@ function generateRandomString($length = 10)
                     $stok = htmlspecialchars($_POST['stok']);
                     $penulis = htmlspecialchars($_POST['penulis']);
                     $penerbit = htmlspecialchars($_POST['penerbit']);
+                    $modifiedDate = htmlspecialchars($_POST['modifiedDate']);
 
                     $target_dir = "../images/";
                     $namaFile = basename($_FILES["foto"]["name"]);

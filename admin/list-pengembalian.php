@@ -2,25 +2,22 @@
 require "session.php";
 require "../koneksi.php";
 
-$queryBuku = mysqli_query($con, "SELECT * FROM buku");
-$jumlahBuku = mysqli_num_rows($queryBuku);
+$queryPengembalian = mysqli_query($con, "SELECT * FROM tbpengembalian");
+$jumlahPengembalian = mysqli_num_rows($queryPengembalian);
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Daftar Buku</title>
+    <title>List Pengembalian</title>
     <link rel="stylesheet" href="../bootstrap-5.3.2-dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="../fontawesome-free-6.4.2-web/css/fontawesome.min.css">
     <style>
         .no-decoration {
             text-decoration: none;
-        }
-
-        form div {
-            margin-bottom: 10px;
         }
 
         /* Custom styles for the table */
@@ -45,56 +42,47 @@ $jumlahBuku = mysqli_num_rows($queryBuku);
     <div class="container mt-5">
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
-                <li class="breadcrumb-item active" aria-current="page">
+                <li class="breadcrumb-item">
                     <a href="../admin" class="no-decoration text-black">
                         <i class="fa-solid fa-house"></i> Home
                     </a>
                 </li>
                 <li class="breadcrumb-item active" aria-current="page">
-                    <a href="list-buku.php" class="no-decoration text-black">
-                        <i class="fa-solid fa-book"></i> Buku
-                    </a>
+                    <i class="fa-solid fa-undo-alt"></i> Pengembalian
                 </li>
             </ol>
         </nav>
-        <h2>Daftar Buku</h2>
+        <h2>List Pengembalian</h2>
 
         <div class="table-responsive">
             <table class="table table-bordered">
                 <thead>
                     <tr>
                         <th scope="col">No</th>
-                        <th scope="col">Nama</th>
-                        <th scope="col">Kategori</th>
-                        <th scope="col">Harga</th>
-                        <th scope="col">Stok</th>
-                        <th scope="col">Waktu Perubahan</th>
+                        <th scope="col">ID Pengembalian</th>
+                        <th scope="col">ID Transaksi</th>
+                        <th scope="col">Nama Buku</th>
+                        <th scope="col">Tanggal Pengembalian</th>
                         <th scope="col">Action</th>
                     </tr>
                 </thead>
                 <tbody>
                     <?php
-                    if ($jumlahBuku == 0) {
-                        ?>
-                        <tr>
-                            <td colspan=6 class="text-center">Data Produk Tidak Tersedia</td>
-                        </tr>
-                        <?php
+                    if ($jumlahPengembalian == 0) {
+                        echo '<tr><td colspan="6" class="text-center">Data Pengembalian Tidak Tersedia</td></tr>';
                     } else {
                         $jumlah = 1;
-                        while ($data = mysqli_fetch_array($queryBuku)) {
+                        while ($dataPengembalian = mysqli_fetch_array($queryPengembalian)) {
                             ?>
                             <tr>
                                 <td><?php echo $jumlah; ?></td>
-                                <td><?php echo $data['nama']; ?></td>
-                                <td><?php echo $data['idKategori']; ?></td>
-                                <td>Rp <?php echo number_format($data['harga'], 0, ',', '.'); ?></td>
-                                <td><?php echo $data['stok']; ?></td>
-                                <td><?php echo $data['modifiedDate'];?>
-                                </td>
+                                <td><?php echo $dataPengembalian['idPengembalian']; ?></td>
+                                <td><?php echo $dataPengembalian['idTransaksi']; ?></td>
+                                <td><?php echo $dataPengembalian['namaBuku']; ?></td>
+                                <td><?php echo $dataPengembalian['tanggalPengembalian']; ?></td>
                                 <td>
-                                    <a href="buku-detail.php?idBuku=<?php echo $data['idBuku']; ?>" class="btn btn-secondary">
-                                        <i class="fas fa-search #ffffff"></i>
+                                    <a href="detail-pengembalian.php?idPengembalian=<?php echo $dataPengembalian['idPengembalian']; ?>" class="btn btn-secondary">
+                                        <i class="fas fa-search"></i>
                                     </a>
                                 </td>
                             </tr>

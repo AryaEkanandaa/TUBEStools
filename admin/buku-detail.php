@@ -124,6 +124,14 @@ function generateRandomString($length = 10)
                 <input type="file" name="foto" id="foto" class="form-control" autocomplete="off">
             </div>
             <div class="mb-3">
+                        <label for="penulis" class="form-label">Penulis</label>
+                        <input type="text" name="penulis" id="penulis" class="form-control" autocomplete="off" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="penerbit" class="form-label">Penerbit</label>
+                        <input type="text" name="penerbit" id="penerbit" class="form-control" autocomplete="off" required>
+                    </div>
+            <div class="mb-3">
                 <label for="deskripsi">Deskripsi</label>
                 <textarea name="deskripsi" id="deskripsi" cols="30" rows="10" class="form-control"
                     autocomplete="off"><?php echo $data['deskripsi'] ?></textarea>
@@ -147,9 +155,15 @@ function generateRandomString($length = 10)
                     ?>
                 </select>
             </div>
+            <div>
+                    <label for="modifiedDate">Tanggal Perubahan Data</label>
+                    <input type="datetime" id="modifiedDate" name="modifiedDate" value="<?php echo date('Y-m-d\TH:i:s', strtotime($data['modifiedDate'])); ?>" class="form-control" autocomplete="off">
+                </div>
             <div class="text-center">
                 <button type="submit" class="btn btn-success" name="simpan">Simpan</button>
                 <i class="fa-regular fa-pen-to-square"></i>
+                <button type="submit" class="btn btn-danger" name="deleteBuku"><i class="fa-solid fa-trash"></i> Delete</button>
+                </div>
             </div>
         </form>
 
@@ -160,6 +174,9 @@ function generateRandomString($length = 10)
             $harga = htmlspecialchars($_POST['harga']);
             $deskripsi = htmlspecialchars($_POST['deskripsi']);
             $stok = htmlspecialchars($_POST['stok']);
+            $penulis = htmlspecialchars($_POST['penulis']);
+            $penerbit = htmlspecialchars($_POST['penerbit']);
+            $modifiedDate = htmlspecialchars($_POST['modifiedDate']);
 
             $target_dir = "../images/";
             $namaFile = basename($_FILES["foto"]["name"]);
@@ -178,7 +195,7 @@ function generateRandomString($length = 10)
             } else {
                 $queryUpdate = mysqli_query($con, "UPDATE buku SET idKategori='$kategori', 
                 nama='$nama', harga='$harga', deskripsi='$deskripsi',
-                stok='$stok' WHERE idBuku=$idBuku");
+                stok='$stok', modifiedDate='$modifiedDate' WHERE idBuku=$idBuku");
 
                 if ($namaFile != '') {
                     if ($image_size > 500000) {
@@ -202,12 +219,23 @@ function generateRandomString($length = 10)
                                 <div class="alert alert-success" role="alert">
                                     Buku Berhasil Tersimpan
                                 </div>
-                                <meta http-equiv="refresh" content="2; url=buku.php" />
+                                <meta http-equiv="refresh" content="2; url=list-buku.php" />
                                 <?php
                             }
                         }
                     }
                 }
+            }
+        }
+        if (isset($_POST['deleteTransaksi'])) {
+            // Proses delete transaksi
+            $queryDeleteBuku = mysqli_query($con, "DELETE FROM buku WHERE idBuku='$idBuku'");
+
+            if ($queryDeleteBuku) {
+                echo '<div class="alert alert-success mt-3" role="alert">Data Buku Berhasil Dihapus</div>';
+                echo '<meta http-equiv="refresh" content="2; url=list-buku.php" />';
+            } else {
+                echo '<div class="alert alert-danger mt-3" role="alert">Gagal Menghapus Transaksi</div>';
             }
         }
         ?>

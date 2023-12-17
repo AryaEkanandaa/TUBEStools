@@ -2,8 +2,8 @@
 require "session.php";
 require "../koneksi.php";
 
-$queryBuku = mysqli_query($con, "SELECT * FROM buku");
-$jumlahBuku = mysqli_num_rows($queryBuku);
+$queryKategori = mysqli_query($con, "SELECT * FROM kategori");
+$jumlahKategori = mysqli_num_rows($queryKategori);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -11,7 +11,7 @@ $jumlahBuku = mysqli_num_rows($queryBuku);
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Daftar Buku</title>
+    <title>Daftar Kategori</title>
     <link rel="stylesheet" href="../bootstrap-5.3.2-dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="../fontawesome-free-6.4.2-web/css/fontawesome.min.css">
     <style>
@@ -51,49 +51,40 @@ $jumlahBuku = mysqli_num_rows($queryBuku);
                     </a>
                 </li>
                 <li class="breadcrumb-item active" aria-current="page">
-                    <a href="list-buku.php" class="no-decoration text-black">
-                        <i class="fa-solid fa-book"></i> Buku
+                    <a href="list-kategori.php" class="no-decoration text-black">
+                        <i class="fa-solid fa-list"></i> Kategori
                     </a>
                 </li>
             </ol>
         </nav>
-        <h2>Daftar Buku</h2>
+        <h2>Daftar Kategori</h2>
 
         <div class="table-responsive">
             <table class="table table-bordered">
                 <thead>
                     <tr>
                         <th scope="col">No</th>
-                        <th scope="col">Nama</th>
-                        <th scope="col">Kategori</th>
-                        <th scope="col">Harga</th>
-                        <th scope="col">Stok</th>
-                        <th scope="col">Waktu Perubahan</th>
+                        <th scope="col">Nama Kategori</th>
                         <th scope="col">Action</th>
                     </tr>
                 </thead>
                 <tbody>
                     <?php
-                    if ($jumlahBuku == 0) {
+                    if ($jumlahKategori == 0) {
                         ?>
                         <tr>
-                            <td colspan=6 class="text-center">Data Produk Tidak Tersedia</td>
+                            <td colspan=3 class="text-center">Data Kategori Tidak Tersedia</td>
                         </tr>
                         <?php
                     } else {
                         $jumlah = 1;
-                        while ($data = mysqli_fetch_array($queryBuku)) {
+                        while ($data = mysqli_fetch_array($queryKategori)) {
                             ?>
                             <tr>
                                 <td><?php echo $jumlah; ?></td>
                                 <td><?php echo $data['nama']; ?></td>
-                                <td><?php echo $data['idKategori']; ?></td>
-                                <td>Rp <?php echo number_format($data['harga'], 0, ',', '.'); ?></td>
-                                <td><?php echo $data['stok']; ?></td>
-                                <td><?php echo $data['modifiedDate'];?>
-                                </td>
                                 <td>
-                                    <a href="buku-detail.php?idBuku=<?php echo $data['idBuku']; ?>" class="btn btn-secondary">
+                                    <a href="kategori-detail.php?idKategori=<?php echo $data['idKategori']; ?>" class="btn btn-secondary">
                                         <i class="fas fa-search #ffffff"></i>
                                     </a>
                                 </td>

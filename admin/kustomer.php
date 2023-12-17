@@ -106,7 +106,11 @@ $jumlahPelanggan = mysqli_num_rows($queryPelanggan);
                 <div>
                     <label for="umur">Umur</label>
                     <input type="umur" class="form-control" name="umur" autocomplete="off" required>
-                </div>  
+                </div> 
+                <div>
+                    <label for="modifiedDate">Tanggal Perubahan Data</label>
+                    <input type="datetime" id="modifiedDate" name="modifiedDate" value="<?php echo date('d-m-Y H:i:s', strtotime($dataTransaksi['modifiedDate'])); ?>" class="form-control" autocomplete="off">
+                </div> 
                 <br>
                 <div>
                     <button type="submit" class="btn btn-success" name="simpanPelanggan">Simpan</button>

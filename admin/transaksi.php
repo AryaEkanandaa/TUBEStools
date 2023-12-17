@@ -173,8 +173,10 @@ function generateRandomString($length = 10)
                     $alamatPengiriman = $_POST['alamatPengiriman'];
                     $kodeReferensi = $_POST['kodeReferensi'];
                     $jenisTransaksi = $_POST['jenisTransaksi'];
+                    $modifiedDate = $_POST['modifiedDate'];
 
-                    $queryTambah = mysqli_query($con, "INSERT INTO tbTransaksi (idPelanggan, idPegawai, idBuku, tanggalTransaksi, totalHarga, metodePembayaran, statusPengiriman, alamatPengiriman, kodeReferensi, jenisTransaksi) VALUES ('$idPelanggan', '$idPegawai', '$idBuku', '$tanggalTransaksi', '$totalHarga', '$metodePembayaran', '$statusPengiriman', '$alamatPengiriman', '$kodeReferensi', '$jenisTransaksi')");
+
+                    $queryTambah = mysqli_query($con, "INSERT INTO tbTransaksi (idPelanggan, idPegawai, idBuku, tanggalTransaksi, totalHarga, metodePembayaran, statusPengiriman, alamatPengiriman, kodeReferensi, jenisTransaksi, modifiedDate) VALUES ('$idPelanggan', '$idPegawai', '$idBuku', '$tanggalTransaksi', '$totalHarga', '$metodePembayaran', '$statusPengiriman', '$alamatPengiriman', '$kodeReferensi', '$jenisTransaksi', '$modifiedDate')");
 
                     if ($queryTambah) {
                         ?>
